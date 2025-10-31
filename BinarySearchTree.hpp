@@ -111,8 +111,37 @@ public:
   // Remove x from the tree. Nothing is done if x is not found.
   void remove(const Comparable &x) { remove(x, root); }
 
+
   string BFT() const {
-    string st;
+  string st;
+
+  queue<Bina*>T;
+  T.push(root);
+
+  while(!T.empty)
+   int longitud_linea= T.size();
+
+
+  for(int i = 0; i<longitud_linea;i++){
+    BinaryNode* u = T.front();
+    T.pop();
+  }
+   st += toStr(u->element);
+
+   if (u->left != nullptr) {
+      q.push(u->left);
+    }
+            
+   if (u->right != nullptr) {
+      q.push(u->right);
+  }
+}
+  
+
+   
+   
+  
+  
     return st;
   }
 
