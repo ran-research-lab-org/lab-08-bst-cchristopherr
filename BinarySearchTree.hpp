@@ -8,7 +8,9 @@
 #include <queue>
 using namespace std;
 
-template <typename T> string toStr(const T &value) {
+
+template <typename T> 
+string toStr(const T &value) {
   ostringstream oss;
   oss << value;
   return oss.str();
@@ -113,45 +115,38 @@ public:
   void remove(const Comparable &x) { remove(x, root); }
 
 
+  
   string BFT() const {
-  string st= "[";
 
-  queue<BinaryNode*>T;
-  T.push(root);
+    string st = "[";
+    queue<BinaryNode*> q;
+    q.push(root);
 
-   bool firstLevel = true;
+    while (!q.empty()) {
+      int levelSize = q.size();
+      st += "[";
 
-  while (!T.empty()) {
-    int longitud_linea = T.size();
-    
-    if (!firstLevel) {
-      st += ",";
-    }
-    firstLevel = false;
-    
-    st += "[";
+      for (int i = 0; i < levelSize; ++i) {
+        BinaryNode* curr = q.front();
+        q.pop();
 
-    for (int i = 0; i < longitud_linea; i++) {
-      BinaryNode* u = T.front();
-      T.pop();
-      
-      st += toStr(u->element);
-      
-      if (i < longitud_linea - 1) {
-        st += ",";
-      }
+        st += toStr(curr->element);
+        if (i < levelSize - 1) st += ",";
 
-      if (u->left != nullptr) {
-        T.push(u->left);
-      }
-              
-      if (u->right != nullptr) {
-        T.push(u->right);
-      }
-    }
-    
+        if (curr->left) q.push(curr->left);
+        if (curr->right) q.push(curr->right);
+  }
+
     st += "]";
-  } 
+
+    if (!q.empty()) st += ",";
+
+  }
+
+  st += "]";
+  return st;
+}
+
 
   
 private:
