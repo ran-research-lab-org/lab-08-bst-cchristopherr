@@ -24,6 +24,7 @@ TEST_CASE("BinarySearchTree basic operations") {
     C.insert(e);
   }
 
+  CHECK(B.BFT() == "[[10],[4,15],[2,31],[1,56]]");
   
   CHECK(C.toInorderStr() == "2,3,4,6,7,8,10,12,14,15,16,18,20,22,24,26,28,30");
   CHECK(C.BFT() ==

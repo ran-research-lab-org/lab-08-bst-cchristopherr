@@ -1,3 +1,9 @@
+/* 
+Christopher Rivera Madera
+801248062
+Lab 08: Breadth-first traversal of binary tree
+
+*/
 #ifndef BINARY_SEARCH_TREE_H
 #define BINARY_SEARCH_TREE_H
 
@@ -117,9 +123,8 @@ public:
 
   // Devuelve un string que representa los nodos agrupados por nivel y en pares
   string BFT() const {
-    
+    if (root == nullptr) return "[]";
     string st = "["; // String para almacenar el resultado
-
     // Queue para recorrer los nodos por niveles
     queue<BinaryNode*> q;
     q.push(root);
@@ -140,7 +145,7 @@ public:
         // Se agregan los hijos a la cola para el siguiente nivel
         if (curr->left) q.push(curr->left);
         if (curr->right) q.push(curr->right);
-  }
+    }
 
     st += "]";//se cierra el corchete
 
