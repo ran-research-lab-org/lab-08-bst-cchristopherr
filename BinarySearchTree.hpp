@@ -115,35 +115,41 @@ public:
   void remove(const Comparable &x) { remove(x, root); }
 
 
-  
+  // Devuelve un string que representa los nodos agrupados por nivel y en pares
   string BFT() const {
+    
+    string st = "["; // String para almacenar el resultado
 
-    string st = "[";
+    // Queue para recorrer los nodos por niveles
     queue<BinaryNode*> q;
     q.push(root);
 
+    // Mientras existan nodos por procesar
     while (!q.empty()) {
-      int levelSize = q.size();
-      st += "[";
+      int levelSize = q.size();//Cantidad de nodos del nivel actual
+      st += "[";//Corchete para el par del nivel actual
 
+      //Se recorren y verifican todos los nodos del nivel actual
       for (int i = 0; i < levelSize; ++i) {
         BinaryNode* curr = q.front();
         q.pop();
 
-        st += toStr(curr->element);
+        st += toStr(curr->element);//Se añade el valor al string
         if (i < levelSize - 1) st += ",";
 
+        // Se agregan los hijos a la cola para el siguiente nivel
         if (curr->left) q.push(curr->left);
         if (curr->right) q.push(curr->right);
   }
 
-    st += "]";
+    st += "]";//se cierra el corchete
 
+    //Se añade una coma entre niveles, si hay más niveles
     if (!q.empty()) st += ",";
 
   }
 
-  st += "]";
+  st += "]";// Se cierra el corchete final
   return st;
 }
 
