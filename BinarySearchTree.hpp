@@ -5,6 +5,7 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
+#include <queue>
 using namespace std;
 
 template <typename T> string toStr(const T &value) {
@@ -113,38 +114,46 @@ public:
 
 
   string BFT() const {
-  string st;
+  string st= "[";
 
-  queue<Bina*>T;
+  queue<BinaryNode*>T;
   T.push(root);
 
-  while(!T.empty)
-   int longitud_linea= T.size();
+   bool firstLevel = true;
 
-
-  for(int i = 0; i<longitud_linea;i++){
-    BinaryNode* u = T.front();
-    T.pop();
-  }
-   st += toStr(u->element);
-
-   if (u->left != nullptr) {
-      q.push(u->left);
+  while (!T.empty()) {
+    int longitud_linea = T.size();
+    
+    if (!firstLevel) {
+      st += ",";
     }
-            
-   if (u->right != nullptr) {
-      q.push(u->right);
-  }
-}
-  
+    firstLevel = false;
+    
+    st += "[";
 
-   
-   
-  
-  
-    return st;
-  }
+    for (int i = 0; i < longitud_linea; i++) {
+      BinaryNode* u = T.front();
+      T.pop();
+      
+      st += toStr(u->element);
+      
+      if (i < longitud_linea - 1) {
+        st += ",";
+      }
 
+      if (u->left != nullptr) {
+        T.push(u->left);
+      }
+              
+      if (u->right != nullptr) {
+        T.push(u->right);
+      }
+    }
+    
+    st += "]";
+  } 
+
+  
 private:
   struct BinaryNode {
     Comparable element;
