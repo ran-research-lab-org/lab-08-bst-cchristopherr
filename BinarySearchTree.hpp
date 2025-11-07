@@ -1,3 +1,9 @@
+/* 
+Christopher Rivera Madera
+801248062
+Lab 08: Breadth-first traversal of binary tree.
+
+*/
 #ifndef BINARY_SEARCH_TREE_H
 #define BINARY_SEARCH_TREE_H
 
@@ -5,9 +11,12 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
+#include <queue>
 using namespace std;
 
-template <typename T> string toStr(const T &value) {
+
+template <typename T> 
+string toStr(const T &value) {
   ostringstream oss;
   oss << value;
   return oss.str();
@@ -111,11 +120,46 @@ public:
   // Remove x from the tree. Nothing is done if x is not found.
   void remove(const Comparable &x) { remove(x, root); }
 
+
+  // Devuelve un string que representa los nodos agrupados por nivel y en pares
   string BFT() const {
-    string st;
-    return st;
+    if (root == nullptr) return "[]";
+    string st = "["; // String para almacenar el resultado
+    // Queue para recorrer los nodos por niveles
+    queue<BinaryNode*> q;
+    q.push(root);
+
+    // Mientras existan nodos por procesar
+    while (!q.empty()) {
+      int levelSize = q.size();//Cantidad de nodos del nivel actual
+      st += "[";//Corchete para el par del nivel actual
+
+      //Se recorren y verifican todos los nodos del nivel actual
+      for (int i = 0; i < levelSize; ++i) {
+        BinaryNode* curr = q.front();
+        q.pop();
+
+        st += toStr(curr->element);//Se añade el valor al string
+        if (i < levelSize - 1) st += ",";
+
+        // Se agregan los hijos a la cola para el siguiente nivel
+        if (curr->left) q.push(curr->left);
+        if (curr->right) q.push(curr->right);
+    }
+
+    st += "]";//se cierra el corchete
+
+    //Se añade una coma entre niveles, si hay más niveles
+    if (!q.empty()) st += ",";
+
   }
 
+  st += "]";// Se cierra el corchete final
+  return st;
+}
+
+
+  
 private:
   struct BinaryNode {
     Comparable element;
