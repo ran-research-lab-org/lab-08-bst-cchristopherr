@@ -1,7 +1,7 @@
 /* 
 Christopher Rivera Madera
 801248062
-Lab 08: Breadth-first traversal of binary tree
+Lab 08: Breadth-first traversal of binary tree.
 
 */
 #ifndef BINARY_SEARCH_TREE_H
